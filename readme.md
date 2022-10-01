@@ -1,7 +1,20 @@
 Test python code using pylint:
-pylint myexample.py -r y
+pylint (classname).py -r y
+
+# DOWNLOAD THE SOURCE CODE PROJECT :
+
+GIT CLONE -
+
+# git clone https://github.com/codingwithroby/fastapi-the-complete-course.git
+
+CMDS AFTER DOWNLOADING THE SOURCE CODE EXAMPLE :
+
+# pip install -r requirements.txt
+
+# INSTALLS ALL THE REQUIRED DEPENDENCIES
 
 ========================
+
 Install FastAPI
 
 To check Pip version :- python -m pip --version
@@ -10,12 +23,21 @@ pip list :- To list the packages installed by pip manager in python.
 
 To install virtualenv :- pip install virtualenv
 
-To create the FastAPI virtual environment :- python -m venv fastapienv
+To create the FastAPI virtual environment :-
 
-To activate the fastapienv / cmd :- Redirect to FastAPI project folder -> fastapienv-> Scripts -> activate
-To de-activate the env /cmd :- Redirect to FastAPI project folder -> fastapienv-> Scripts -> deactivate
+# python -m venv fastapienv
 
-To install all dependencies for FastAPI:- pip install fastapi[all]
+To activate the fastapienv / cmd :-
+
+# Redirect to FastAPI project folder -> fastapienv-> Scripts -> activate
+
+To de-activate the env /cmd :-
+
+# Redirect to FastAPI project folder -> fastapienv-> Scripts -> deactivate
+
+To install all dependencies for FastAPI:-
+
+# pip install fastapi[all]
 
 # unicorn is another dependency for fastapi development like fastapi , virenv
 
@@ -23,7 +45,9 @@ To install all dependencies for FastAPI:- pip install fastapi[all]
 
 # UVICORN - TO REGISTER OUR SERVER WITH ASGI
 
-To run the fastapi in cmd Redirect to base root folder :- uvicorn (classname):app --reload
+To run the fastapi in cmd Redirect to base root folder :-
+
+# uvicorn (classname):app --reload
 
 # --reload :- TO restart the server used in Development server not in Production server
 
