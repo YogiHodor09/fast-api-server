@@ -17,11 +17,15 @@ CMDS AFTER DOWNLOADING THE SOURCE CODE EXAMPLE :
 
 Install FastAPI
 
-To check Pip version :- python -m pip --version
+To check Pip version :-
+
+# python -m pip --version
 
 pip list :- To list the packages installed by pip manager in python.
 
-To install virtualenv :- pip install virtualenv
+To install virtualenv :-
+
+# pip install virtualenv
 
 To create the FastAPI virtual environment :-
 
@@ -90,3 +94,14 @@ connect() - Create a tunnel to the server , based on the target resource
 500 - Server errors : An error has occurred in the server
 
 =====================================
+
+# TO MAKE QUERY PARAM OPTIONAL
+
+@get('/etc')
+def (str : Optional[str])
+
+# TO ASSIGN QUERY PARAMS IN DECORATOR
+
+# BY DEFAULT POST AND PUT METHOD VARIABLES IS TAKEN AS QUERY PARAMS
+
+# @get('/assign/') -> '/ at the end denotes that this variable is a Query Param.'
