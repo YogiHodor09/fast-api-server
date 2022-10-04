@@ -73,13 +73,13 @@ ENDPOINTS METHODS EXPLANATION FOR :
 
 # HTTP REQUEST METHODS
 
-get() - Read method that retreives data
+get() - Read method that retrieves data
 post() - Create method , to submit data
 put() - Update the entire resource
 patch() - Update the part of resource
 delete() - Delete the resource
 
-# FASTAPI ADDTIONAL HTTP REQUEST METHODS
+# FASTAPI ADDITIONAL HTTP REQUEST METHODS
 
 trace() - Performs a message loop-back to the target
 options() - Describes communication options to the target
@@ -104,4 +104,4 @@ def (str : Optional[str])
 
 # BY DEFAULT POST AND PUT METHOD VARIABLES IS TAKEN AS QUERY PARAMS
 
-# @get('/assign/') -> '/ at the end denotes that this variable is a Query Param.'
+# @get('/assign/') -> '/ at the end denotes that this end point accepts Query Param.'

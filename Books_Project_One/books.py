@@ -12,6 +12,7 @@ BOOKS = {
     'book_5': {'title': 'Title Five', 'author': 'Author Five'}
 }
 
+
 # Enum values for path params in API
 
 
@@ -20,6 +21,7 @@ class DirectionName(str, Enum):
     south = 'South'
     east = 'East'
     west = 'West'
+
 
 # READ ALL BOOKS FROM DICT CREATED
 
@@ -33,12 +35,14 @@ async def read_all_books(skip_book: Optional[str] = None):
         return new_books
     return BOOKS
 
+
 # GET BOOK BY BOOK_NAME AS DICT 'KEY'
 
 
 @app.get('/{book_name}')
 async def read_book(book_name: str):
     return BOOKS[book_name]
+
 
 # Enumeration as path params
 
@@ -54,6 +58,7 @@ async def get_direction(direction_name: DirectionName):
     if direction_name == DirectionName.east:
         return {'Direction': direction_name, 'sub': 'Right'}
 
+
 # CRUD - OPERATIONS
 # CREATE - BOOK
 
@@ -67,9 +72,10 @@ async def create_book(book_title, book_author):
             if x > current_book_id:
                 current_book_id = x
 
-    BOOKS[f'book_{current_book_id+1}'] = {'title': book_title,
-                                          'author': book_author}
+    BOOKS[f'book_{current_book_id + 1}'] = {'title': book_title,
+                                            'author': book_author}
     return BOOKS[f'book_{current_book_id + 1}']
+
 
 # UPDATE BOOK
 
