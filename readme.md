@@ -60,11 +60,11 @@ Output in browser :
 "message": "Hello Yogeshwar!"
 } // \*\*\*\* FastAPI will return the response in JSON Format
 
-To see openapi schema url / your endpoint:-
+# To see openapi schema url / your endpoint:-
 
 # http://127.0.0.1:8000/openapi.json
 
-To view SwaggerUI right away for our rest API created :-
+# To view SwaggerUI right away for our rest API created :-
 
 # http://127.0.0.1:8000/docs
 
@@ -90,7 +90,8 @@ connect() - Create a tunnel to the server , based on the target resource
 100 - Informational response : Request processing.
 200 - Success : Request successfully completed
 300 - Redirection : Further action must be complete
-400 - Client errors : An error caused by the request from the client (syntax not understandable by the server from the client)
+400 - Client errors : An error caused by the request from the client (syntax not understandable by the server from the
+client)
 500 - Server errors : An error has occurred in the server
 
 =====================================
@@ -105,3 +106,38 @@ def (str : Optional[str])
 # BY DEFAULT POST AND PUT METHOD VARIABLES IS TAKEN AS QUERY PARAMS
 
 # @get('/assign/') -> '/ at the end denotes that this end point accepts Query Param.'
+
+# TO INSTALL SQL ALCHEMY FOR SQL CONNECTION AND MANAGEMENT :
+
+# pip install sqlalchemy
+
+====================================
+
+# TO CREATE A DB IN FASTAPI:
+
+Step 1:-
+
+1. Create Engine based DB Url
+2. Create DB Session
+3. Create Base class for DB Models
+
+Step 2:-
+
+1. Create Model class for Columns for DB Table created.
+
+Step 3:-
+
+1. In main.py file = Create instance for model created with Base and Bind Engine
+
+# To run the sqlite3 DB in Terminal
+
+# or in DB Browser App for sqlite :-
+
+Project Folder -> sqlite3 dbname.db
+
+CMDS :-
+Terminal ->
+.schema
+.mode (o/p mode for display) eg: .mode column
+
+=======================================

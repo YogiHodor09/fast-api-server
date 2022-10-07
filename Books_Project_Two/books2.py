@@ -21,7 +21,8 @@ class Book(BaseModel):
     id: UUID  # Universal Unique Identifier
     title: str = Field(min_length=1)
     author: str = Field(min_length=1, max_length=100)
-    description: Optional[str] = Field(title='Description of the book', max_length=100, min_length=1)
+    description: Optional[str] = Field(
+        title='Description of the book', max_length=100, min_length=1)
     rating: int = Field(gt=-1, le=101)
 
     class Config:
@@ -41,7 +42,8 @@ class BookNoRating(BaseModel):
     id: UUID
     title: str = Field(min_length=1)
     author: str = Field(min_length=1, max_length=100)
-    description: Optional[str] = Field(title='Description of the book', max_length=100, min_length=1)
+    description: Optional[str] = Field(
+        title='Description of the book', max_length=100, min_length=1)
 
 
 BOOKS = []
@@ -53,7 +55,8 @@ BOOKS = []
 async def negative_number_exception_handler(request: Request, exception: NegativeNumberException):
     return JSONResponse(
         status_code=418,
-        content={'message': f'Hey , Why you need {exception.books_to_return} books? You need to read more!'},
+        content={
+            'message': f'Hey , Why you need {exception.books_to_return} books? You need to read more!'},
     )
 
 
