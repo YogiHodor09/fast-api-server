@@ -141,3 +141,13 @@ Terminal ->
 .mode (o/p mode for display) eg: .mode column
 
 =======================================
+
+# CREATE HASH PASSWORD LIB :
+
+pip install "passlib[bcrypt]"
+
+# import Depends from FastAPI - Create DB Functions
+
+# import Password Bearer for token:
+
+pip install "python-jose[cryptography]"
