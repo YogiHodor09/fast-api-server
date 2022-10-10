@@ -1,4 +1,5 @@
-Test python code using pylint:
+# Test python code using python pylint:
+
 pylint (classname).py -r y
 
 # DOWNLOAD THE SOURCE CODE PROJECT :

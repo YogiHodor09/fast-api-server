@@ -1,6 +1,3 @@
-
-from curses.ascii import HT
-from tkinter.messagebox import NO
 from typing import Optional
 from fastapi import FastAPI, Depends, HTTPException, status
 from pydantic import BaseModel
@@ -138,7 +135,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         user.username, user.id, expires_delta=token_expires)
 
     return {
-        'status': 'JWT Token Generation Success',
         'token': token
     }
 

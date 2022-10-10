@@ -1,12 +1,10 @@
-
-from operator import mod
-from statistics import mode
-from typing import Optional
+from typing import Dict, Optional
 from fastapi import FastAPI, Depends, HTTPException
 import models
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
+import auth
 
 app = FastAPI()
 
@@ -40,26 +38,37 @@ class ToDo(BaseModel):
 async def read_all(db: Session = Depends(get_db)):
     return db.query(models.Todos).all()
 
-# get data by todo_id
+
+@app.get('/todos/user')
+async def read_all_by_user(user: dict = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+    if user is None:
+        raise auth.get_user_exception()
+    return db.query(models.Todos).filter(
+        models.Todos.owner_id == user.get("id")).all()
+
+    # get data by todo_id
 
 
-@app.get('/todo/{todo_id}')
-async def read_todo(todo_id: int, db: Session = Depends(get_db)):
+@ app.get('/todo/{todo_id}')
+async def read_todo(todo_id: int, user: dict = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+    if user is None:
+        raise auth.get_user_exception()
     todo_model = db.query(models.Todos).filter(
-        models.Todos.id == todo_id).first()
+        models.Todos.id == todo_id).filter(models.Todos.owner_id == user.get('id')).first()
     if todo_model is not None:
         return todo_model
     raise http_exception()
 
 
 # create todo item
-@app.post('/')
-async def create_todo(todo: ToDo, db: Session = Depends(get_db)):
+@ app.post('/create_todo')
+async def create_todo(todo: ToDo, user: dict = Depends(auth.get_current_user), db: Session = Depends(get_db)):
     todo_model = models.Todos()
     todo_model.title = todo.title
     todo_model.description = todo.description
     todo_model.priority = todo.priority
     todo_model.complete = todo.complete
+    todo_model.owner_id = user.get('id')
 
     db.add(todo_model)
     db.commit()
@@ -68,10 +77,12 @@ async def create_todo(todo: ToDo, db: Session = Depends(get_db)):
 
 
 # Update todo item
-@app.put('/{todo_id}')
-async def update_todo(todo_id: int, todo: ToDo, db: Session = Depends(get_db)):
+@ app.put('/{todo_id}')
+async def update_todo(todo_id: int, todo: ToDo, user: dict = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+    if user is None:
+        raise auth.get_user_exception()
     todo_model = db.query(models.Todos).filter(
-        models.Todos.id == todo_id).first()
+        models.Todos.id == todo_id).filter(models.Todos.owner_id == user.get('id')).first()
 
     if todo_model is None:
         raise http_exception()
@@ -90,11 +101,13 @@ async def update_todo(todo_id: int, todo: ToDo, db: Session = Depends(get_db)):
 # Delete todo Item
 
 
-@app.delete('/{todo_id}')
-async def delete_todo(todo_id: int, db: Session = Depends(get_db)):
+@ app.delete('/{todo_id}')
+async def delete_todo(todo_id: int, user: dict = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+    if user is None:
+        raise auth.get_user_exception()
     todo_model = db.query(models.Todos).filter(
         models.Todos.id == todo_id
-    ).first()
+    ).filter(models.Todos.id == user.get('id')).first()
 
     if todo_model is None:
         raise http_exception()
