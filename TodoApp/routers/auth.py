@@ -1,13 +1,16 @@
-from typing import Optional
-from fastapi import FastAPI, Depends, HTTPException, status
-from pydantic import BaseModel
-import models
-from passlib.context import CryptContext
-from sqlalchemy.orm import Session
-from database import engine, SessionLocal
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from datetime import datetime, timedelta
+from fastapi import Depends, HTTPException, status, APIRouter
 from jose import jwt, JWTError
+from datetime import datetime, timedelta
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from database import engine, SessionLocal
+from sqlalchemy.orm import Session
+from passlib.context import CryptContext
+import models
+from pydantic import BaseModel
+from typing import Optional
+import sys
+sys.path.append('..')
+
 
 # JWT Conts
 SECRET_KEY = 'yOgEsHwAr'
@@ -29,8 +32,15 @@ models.Base.metadata.create_all(bind=engine)
 # Extract the data from Authorization header
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='token')
 
-
-app = FastAPI()
+router = APIRouter(
+    prefix='/auth',
+    tags=['auth'],
+    responses={
+        401: {
+            'user': 'Not authorized'
+        }
+    }
+)
 
 
 def get_db():
@@ -103,7 +113,7 @@ async def get_current_user(token: str = Depends(oauth2_bearer)):
     # Create user ro User table in DB
 
 
-@app.post('/create/user')
+@router.post('/create_user')
 async def create_new_user(create_user: CreateUser, db: Session = Depends(get_db)):
     create_user_model = models.Users()
     create_user_model.email = create_user.email
@@ -122,7 +132,7 @@ async def create_new_user(create_user: CreateUser, db: Session = Depends(get_db)
 
 
 # Authenticate the user with valid authentication using OAuth2Form
-@app.post('/token')
+@router.post('/token')
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                                  db: Session = Depends(get_db)):
     user = authenticate_user(form_data.username, form_data.password, db)
