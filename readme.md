@@ -152,3 +152,21 @@ pip install "passlib[bcrypt]"
 # import Password Bearer for token:
 
 pip install "python-jose[cryptography]"
+
+===============================
+
+# TO CONNECT TO POSTGRESQL :
+
+# INSTALL LIB :
+
+pip install psycopg2-binary
+
+===============================
+
+# TO CONNECT TO MYSQL :
+
+# INSTALL LIB :
+
+pip install pymysql
+
+===============================
