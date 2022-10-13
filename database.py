@@ -6,10 +6,10 @@ from sqlalchemy.ext.declarative import declarative_base
 # SQLALCHEMY_DATABASE_URL = 'sqlite:///./todos.db'
 
 # To connect to postgresql
-# SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:root@localhost/TodoApplicationDatabase'
+SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:root@localhost/TodoApplicationDatabase'
 
 # To connect to mysql
-SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:root@127.0.0.1:3306/todoapp'
+# SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:root@127.0.0.1:3306/todoapp'
 
 
 # Create SQLITE Engine

@@ -6,11 +6,11 @@ pylint (classname).py -r y
 
 GIT CLONE -
 
-# git clone https://github.com/codingwithroby/fastapi-the-complete-course.git
+git clone https://github.com/codingwithroby/fastapi-the-complete-course.git
 
 CMDS AFTER DOWNLOADING THE SOURCE CODE EXAMPLE :
 
-# pip install -r requirements.txt
+pip install -r requirements.txt
 
 # INSTALLS ALL THE REQUIRED DEPENDENCIES
 
@@ -18,35 +18,35 @@ CMDS AFTER DOWNLOADING THE SOURCE CODE EXAMPLE :
 
 Install FastAPI
 
-To check Pip version :-
+# To check Pip version :-
 
-# python -m pip --version
+python -m pip --version
 
 pip list :- To list the packages installed by pip manager in python.
 
-To install virtualenv :-
+# To install virtualenv :-
 
-# pip install virtualenv
+pip install virtualenv
 
-To create the FastAPI virtual environment :-
+# To create the FastAPI virtual environment :-
 
-# python -m venv fastapienv
+python -m venv fastapienv
 
-To activate the fastapienv / cmd :-
+# To activate the fastapienv / cmd :-
 
 # Redirect to FastAPI project folder -> fastapienv-> Scripts -> activate
 
-To de-activate the env /cmd :-
+# To de-activate the env /cmd :-
 
 # Redirect to FastAPI project folder -> fastapienv-> Scripts -> deactivate
 
-To install all dependencies for FastAPI:-
+# To install all dependencies for FastAPI:-
 
-# pip install fastapi[all]
+pip install fastapi[all]
 
 # unicorn is another dependency for fastapi development like fastapi , virenv
 
-# https://www.uvicorn.org/
+https://www.uvicorn.org/
 
 # UVICORN - TO REGISTER OUR SERVER WITH ASGI
 
@@ -63,7 +63,7 @@ Output in browser :
 
 # To see openapi schema url / your endpoint:-
 
-# http://127.0.0.1:8000/openapi.json
+http://127.0.0.1:8000/openapi.json
 
 # To view SwaggerUI right away for our rest API created :-
 
@@ -110,7 +110,7 @@ def (str : Optional[str])
 
 # TO INSTALL SQL ALCHEMY FOR SQL CONNECTION AND MANAGEMENT :
 
-# pip install sqlalchemy
+pip install sqlalchemy
 
 ====================================
 
@@ -170,3 +170,51 @@ pip install psycopg2-binary
 pip install pymysql
 
 ===============================
+
+# TO INSTALL ALEMBIC in FASTAPI :-
+
+pip install alembic
+
+# TO INITIALISE ALEMBIC IN PROJECT :-
+
+alembic init <dir-name> / eg:- alembic init alembic
+
+# alembic.ini file has the set of properties and configurations for the project.
+
+O/P :- <dir-name>.ini file / alembic.ini , dir created , alembic folder created with env.py file and
+script.py.mako file
+
+# STEPS TO UPGRADE THE REVISION FOR ALEMBIC :-
+
+USE POSTGRE-SQL OR MYSQL its an option
+
+1. Map the DB sqlalchemy url - sqlalchemy.url = mysql+pymysql://root:root@127.0.0.1:3306/todoapp
+2. Import sys package
+
+# Inside env.py file - Use fileconfig and config meta_data below config
+
+fileConfig(config.config_file_name)
+
+target_metadata = models.Base.metadata
+
+# TO CREATE ALEMBIC REVISION
+
+alembic revision -m "message needs from user"
+
+# To alter table or add new column in existing DB :-
+
+Inside Revision file created :
+
+1. Under upgrade() :-
+   op.add_column('users', sa.COLUMN(
+   'phone_number', sa.Integer(), nullable=True))
+
+# TO UPGRADE THE ALEMBIC DB
+
+CMD :- alembic upgrade <revision number> / eg: alembic upgrade a81013d3f3b3
+
+O/P :- Added new column in DB Table('users')
+
+# TO DOWNGRADE THE ALEMBIC DB
+
+CMD :- alembic downgrade -1 (Revert the last change happened)
